@@ -1,5 +1,9 @@
 {
     "extends": "./tsconfig",
+    "include": [
+        "lib/**/*.ts",
+        "lib/**/*.tsx",
+    ],
     "exclude": [
         "node_modules",
         "dist",
