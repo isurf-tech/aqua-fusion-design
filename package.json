@@ -30,7 +30,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@ef-carbon/tspm": "^2.2.5",
     "@storybook/addon-essentials": "^7.2.1",
     "@storybook/addon-interactions": "^7.2.1",
     "@storybook/addon-links": "^7.2.1",
