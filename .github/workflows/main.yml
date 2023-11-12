@@ -1,46 +1,56 @@
 name: Build and Publish
 
 on:
-  push:
-    branches:
-      - main 
+    push:
+        branches:
+            - main
 
 jobs:
-  build-and-publish:
-    runs-on: ubuntu-latest
+    build:
+        runs-on: ubuntu-latest
 
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v2
 
-    - name: Cache node modules
-      uses: actions/cache@v2
-      with:
-        path: |
-          ~/.npm
-          ./node_modules
-        key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-npm-
+            - name: Cache node modules
+              uses: actions/cache@v2
+              with:
+                  path: |
+                      ~/.npm
+                      ./node_modules
+                  key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+                  restore-keys: |
+                      ${{ runner.os }}-npm-
 
-    - name: Extract Node.js version from .nvmrc
-      id: extract-node-version
-      run: echo "::set-output name=node_version::$(cat .nvmrc)"
+            - name: Extract Node.js version from .nvmrc
+              id: extract-node-version
+              run: echo "::set-output name=node_version::$(cat .nvmrc)"
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ steps.extract-node-version.outputs.node_version }}
+            - name: Set up Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: ${{ steps.extract-node-version.outputs.node_version }}
 
-    - name: Install dependencies
-      run: npm install
+            - name: Install dependencies
+              run: npm install
 
-    - name: Build
-      run: npm run build 
+            - name: Build
+              run: npm run build
 
-    - name: Publish to GitHub Packages
-      run: |
-        echo "//npm.pkg.github.com/:_authToken=\${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
-        npm publish --access public
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    publish:
+        needs: build
+        runs-on: ubuntu-latest
+        permissions:
+            packages: write
+            contents: read
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: 18
+                  scope: '@isurf-tech'
+                  registry-url: 'https://npm.pkg.github.com'
+            - run: npm publish
+              env:
+                  NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
