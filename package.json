@@ -1,7 +1,10 @@
 {
-  "name": "aqua-fusion-design",
+  "name": "@isurf-tech/aqua-fusion-design",
   "version": "1.0.0",
   "description": "Aqua Fusion Design System",
+  "repository": "git@github.com:isurf-tech/aqua-fusion-design.git",
+  "author": "matheus maciel <matheusmmelchiades@gmail.com>",
+  "license": "MIT",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
@@ -27,8 +30,12 @@
     "storybook",
     "aqua fusion design"
   ],
-  "author": "",
-  "license": "ISC",
+  "files": [
+    "dist",
+    "types",
+    "LICENSE",
+    "README.md"
+  ],
   "devDependencies": {
     "@storybook/addon-essentials": "^7.2.1",
     "@storybook/addon-interactions": "^7.2.1",
@@ -54,11 +61,5 @@
   },
   "dependencies": {
     "tailwind-variants": "^0.1.13"
-  },
-  "files": [
-    "dist",
-    "types",
-    "LICENSE",
-    "README.md"
-  ]
+  }
 }
