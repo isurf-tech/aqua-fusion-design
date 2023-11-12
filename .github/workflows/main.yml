@@ -23,11 +23,14 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-npm-
 
+    - name: Extract Node.js version from .nvmrc
+      id: extract-node-version
+      run: echo "::set-output name=node_version::$(cat .nvmrc)"
+
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: $(cat .nvmrc)
-
+        node-version: ${{ steps.extract-node-version.outputs.node_version }}
 
     - name: Install dependencies
       run: npm install
