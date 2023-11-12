@@ -6,7 +6,7 @@ on:
             - main
 
 jobs:
-    build:
+    build-and-publish:
         runs-on: ubuntu-latest
 
         steps:
@@ -38,17 +38,10 @@ jobs:
             - name: Build
               run: npm run build
 
-    publish:
-        needs: build
-        runs-on: ubuntu-latest
-        permissions:
-            packages: write
-            contents: read
-        steps:
-            - uses: actions/checkout@v3
-            - uses: actions/setup-node@v3
+            - name: Publish
+              uses: actions/setup-node@v3
               with:
-                  node-version: 18
+                  node-version: ${{ needs.build.outputs.node_version }}
                   scope: '@isurf-tech'
                   registry-url: 'https://npm.pkg.github.com'
             - run: npm publish
