@@ -80,7 +80,7 @@ module.exports = {
       borderColor: colors,
       colors,
       textColor: colors,
-      text: {
+      fontSize: {
         "3xs": "0.625rem",  // 10px
         "2xs": "0.75rem",   // 12px
         xs: "0.875rem",     // 14px
@@ -93,6 +93,17 @@ module.exports = {
       },
       fontFamily: {
         inter: ["Inter", "sans-serif"]
+      },
+      fontWeight: {
+        thin: '100',
+        extralight: '200',
+        light: '300',
+        normal: '400',
+        medium: '500',
+        semibold: '600',
+        bold: '700',
+        extrabold: '800',
+        black: '900',
       }
     },
   },

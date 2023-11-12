@@ -8,11 +8,12 @@ export default function Button({
     label,
     variant,
     disabled,
-    onClick,
+    onClick, 
+    className,
 }: ButtonProps) {
     return (
         <button
-            className={buttonVariants({ size, variant })}
+            className={buttonVariants({ size, variant, class: className })}
             disabled={disabled}
             onClick={onClick}
         >
