@@ -2,17 +2,35 @@
   "name": "aqua-fusion-design",
   "version": "1.0.0",
   "description": "Aqua Fusion Design System",
-  "main": "lib/index.tsx",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
   "scripts": {
+    "clean": "rm -rf ./dist",
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "build": "tsc -p tsconfig.build.json"
+    "buildx:esm": "tsc -p tsconfig.esm.json && mv dist/esm/index.js dist/esm/index.mjs",
+    "build:css": "postcss -c postcss.config.js -o dist/main.css lib/**/*.css && cp dist/main.css dist/esm/main.css && cp dist/main.css dist/cjs/main.css && rm -rf dist/main.css",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build": "npm run clean && npm run build:esm && npm run build:cjs && npm run build:css",
+    "prepack": "npm run build"
   },
-  "keywords": [],
+  "keywords": [
+    "react",
+    "tailwindcss",
+    "design",
+    "system",
+    "ui",
+    "components",
+    "storybook",
+    "aqua fusion design"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@ef-carbon/tspm": "^2.2.5",
     "@storybook/addon-essentials": "^7.2.1",
     "@storybook/addon-interactions": "^7.2.1",
     "@storybook/addon-links": "^7.2.1",
@@ -25,6 +43,7 @@
     "@types/react": "^18.2.18",
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.27",
+    "postcss-cli": "^10.1.0",
     "prettier": "3.0.1",
     "prettier-plugin-tailwindcss": "^0.4.1",
     "react": "^18.2.0",
@@ -36,5 +55,11 @@
   },
   "dependencies": {
     "tailwind-variants": "^0.1.13"
-  }
+  },
+  "files": [
+    "dist",
+    "types",
+    "LICENSE",
+    "README.md"
+  ]
 }

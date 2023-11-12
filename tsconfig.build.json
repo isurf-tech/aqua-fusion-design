@@ -1,12 +1,14 @@
 {
     "extends": "./tsconfig",
+    "compilerOptions": {},
     "include": [
         "lib/**/*.ts",
         "lib/**/*.tsx",
+        "lib/styles",
     ],
     "exclude": [
         "node_modules",
         "dist",
-        "stories"
-    ]
+        "stories",
+    ],
 }

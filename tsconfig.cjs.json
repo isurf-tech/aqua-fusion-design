@@ -1,0 +1,15 @@
+{
+    "extends": [
+        "./tsconfig.json",
+        "./tsconfig.build.json",
+    ],
+    "compilerOptions": {
+        "module": "CommonJS",
+        "outDir": "dist/cjs",
+        "paths": {
+            "styles": [
+                "../styles/*"
+            ]
+        }
+    },
+}
