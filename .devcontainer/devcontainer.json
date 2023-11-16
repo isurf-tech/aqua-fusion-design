@@ -11,9 +11,17 @@
   "settings": {
     "terminal.integrated.shell.linux": "/bin/bash"
   },
-  "forwardPorts": [6006],
-  "appPort": [6006],
+  "forwardPorts": [
+    6006
+  ],
+  "appPort": [
+    6006
+  ],
   "postStartCommand": "npm install && npm run storybook",
   "workspaceMount": "source=${localWorkspaceFolder}/path/to/your/app,target=/workspace,type=bind,consistency=cached",
-  "overrideCommand": false
+  "overrideCommand": false,
+  "installsAfter": [
+    "ghcr.io/devcontainers-contrib/features/npm-package",
+    "ghcr.io/devcontainers-contrib/features/ts-node:1"
+  ]
 }
