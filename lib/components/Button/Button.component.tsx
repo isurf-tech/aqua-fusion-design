@@ -10,9 +10,11 @@ export default function Button({
     disabled,
     onClick, 
     className,
+    ...props
 }: ButtonProps) {
     return (
         <button
+            {...props}
             className={buttonVariants({ size, variant, class: className })}
             disabled={disabled}
             onClick={onClick}
